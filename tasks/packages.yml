@@ -1,0 +1,4 @@
+---
+ - name: instalar repo epel-release
+   ansible.builtin.yum:
+     name: epel-release

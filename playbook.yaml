@@ -1,0 +1,11 @@
+---
+
+- hosts: servidor_respaldo
+  tasks:
+ 
+ #   - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/mysql.yml
+
+  become: true
+  become_user: root

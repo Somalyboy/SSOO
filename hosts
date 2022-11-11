@@ -1,0 +1,11 @@
+
+   
+   [servidor]
+   192.168.196.134  
+   
+   [servidor_respaldo]
+   192.168.196.137   
+
+  # [servidor:vars]
+  # ansible_user = user
+
