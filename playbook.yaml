@@ -1,11 +1,21 @@
 ---
 
+- hosts: servidor
+  tasks:
+ 
+    - include_tasks: tasks/packages.yml
+    - include_tasks: tasks/mysql.yml
+    - include_tasks: tasks/CrearUsuario.yml
+    - include_tasks: tasks/CargarDump.yml
+    - include_tasks: tasks/ssh.yml  
+  become: true
+  become_user: root
+
 - hosts: servidor_respaldo
   tasks:
  
- #   - include_tasks: tasks/ssh.yml
     - include_tasks: tasks/packages.yml
-    - include_tasks: tasks/mysql.yml
-
+    - include_tasks: tasks/CrearUsuario.yml
+    - include_tasks: tasks/ssh.yml  
   become: true
   become_user: root

@@ -1,0 +1,11 @@
+---
+ - name: CrearUsuario (Usuario)
+   user: 
+     name: usuario
+     group: wheel 
+     password: $6$0nASHoqC1WanLMp0$Om.YAsfwAR0pWJykqAkpPWJCJk3c8itBONjUoVtY6cCjWkXvQg21.UrMv0aouI1xDLfRj.Ooo41dCw5aL7aDR0
+
+ - name: Pasar clave publica 
+   ansible.posix.authorized_key:
+     user: usuario
+     key: "{{ lookup('file', '/root/.ssh/id_rsa.pub') }} "

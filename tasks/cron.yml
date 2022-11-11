@@ -1,0 +1,14 @@
+---
+ - name: Mandar script a maquina adecuada 
+   copy: 
+     src: Script.sh
+     dest: /home/usuario/
+     owner: usuario
+
+ - name: Establecer momento a ejecutar script (cada 1 dia)
+   cron: 
+     name: script 
+     day: "*/1"
+     job: /home/usuario/Script.sh
+     user: usuario
+     

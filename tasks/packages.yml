@@ -2,3 +2,7 @@
  - name: instalar repo epel-release
    ansible.builtin.yum:
      name: epel-release
+
+ - name: instalar git/rsync
+   ansible.builtin.yum:
+     name: git

@@ -1,13 +1,29 @@
 ---
  - name: instalar repo mysql-community
-   ansible.builtin.yum:
-     name: community.sql
- - name: desactivar sub-repo mysq 8.0 
+   ansible.builtin.yum: 
+     name: https://dev.mysql.com/get/mysql80-community-release-el7-6.noarch.rpm
+
+ - name: desactivar sub-repo mysql 8.0 
+   ini_file:
+     dest: /etc/yum.repos.d/mysql-community.repo
+     section: mysql80-community
+     option: enabled
+     value: 0
+
+ - name: desactivar esta cosa que atomiza  
    ini_file:
      dest: /etc/yum.repos.d/mysql-community.repo
      section: mysql57-community
      option: gpgcheck
-     values: 0
+     value: 0
+
+ - name: activar sub-repo mysql 5.7 
+   ini_file:
+     dest: /etc/yum.repos.d/mysql-community.repo
+     section: mysql57-community
+     option: enabled
+     value: 1
+
  - name: instalar mysql 5.7
    ansible.builtin.yum: 
      name: 

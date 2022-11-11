@@ -1,10 +1,10 @@
 
    
-   [servidor]
-   192.168.196.134  
+[servidor]
+192.168.196.135 ansible_ssh_user=root ansible_ssh_password=root
    
-   [servidor_respaldo]
-   192.168.196.137   
+[servidor_respaldo]
+192.168.196.136 ansible_ssh_user=root ansible_ssh_password=root   
 
   # [servidor:vars]
   # ansible_user = user

@@ -1,0 +1,42 @@
+---
+ - name: Dump de la base de datos copiada al servidor 
+   copy: 
+     src: copia.sql
+     dest: /var
+ 
+ - name: Correr mysql
+   service: 
+     name: mysqld
+     state: restarted 
+
+ - name: complemento necesario para modulo mysql de ansible
+   yum: 
+     name: python2-PyMySQL
+
+ - name: Obtener Password por defecto 
+   shell: 
+     cmd: cat /var/log/mysqld.log | grep "A temporary" | rev | cut -d " " -f1 | rev 
+   register: ppwd_s
+
+ - set_fact:         
+     password_var: "{{ ppwd_s.stdout }}"
+
+ - debug: 
+     var: password_var
+
+ - name: Camabiar Password del root de mysql
+   shell: 
+     cmd: mysql -e "SET PASSWORD = PASSWORD('Root1234!');" --connect-expired-password -u root -p"{{ password_var }}"
+   ignore_errors: yes
+ 
+ - name: Cargar Dump en la base de datos
+   community.mysql.mysql_db:
+     name: proyecto 
+     target: /var/copia.sql
+     state: import 
+     login_user: root
+     login_password: Root1234!
+
+ 
+
+

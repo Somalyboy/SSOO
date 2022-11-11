@@ -2,8 +2,8 @@
     - name:  cambiar puerto ssh
       lineinfile:
         path: /etc/ssh/sshd_config
-        regexp: 'port\ 4444'
-        line: Port 22
+        regexp: '#Port\ 22'
+        line: Port 4444 
 
     - name: desactivar login root SSH
       lineinfile:
@@ -15,16 +15,17 @@
       ansible.builtin.lineinfile:
         path: /etc/ssh/sshd_config
         regexp: "PasswordAuthentication\ yes"
-        line: PAsswordAuthentication no
+        line: PasswordAuthentication no
 
-# - name: restringir usuario ssh 
-#   ansible.builtin.lineinfile:
-#     path: /etc/ssh/ssd_config
-#     line: AllowUsers usuario
-#     create: yes
+    - name: restringir usuario ssh 
+      ansible.builtin.lineinfile:
+         path: /etc/ssh/ssd_config
+         line: AllowUsers usuario
+         create: yes
 
     - name: reiniciar ssh
-      systemd:
+      service:
+        name: ssh
         state: restarted
-        name: sshd
-        enabled: yes
+        enabled: true
+        
